@@ -1,25 +1,56 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import Todos from './components/todos'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  state = {
+    todos:[
+      {
+        id:1,
+        title:'study react',
+        completed: false
+      },
+      {
+        id:2,
+        title:'study php',
+        completed: true
+      },
+      {
+        id:3,
+        title:'study js',
+        completed: false
+      }
+    ],
+    name:'vishnu'
+  }
+
+  makeChange(id){
+    this.setState({ todos: this.state.todos.map(todo => {
+      if(todo.id === id){
+        // if(todo.completed === true){
+        console.log(todo.id)
+        todo.completed = !todo.completed
+      }
+      return todo
+    })
+  })
+  
+  }
+
+  deleteData(id){
+    this.setState({ todos: this.state.todos.filter(dItem => dItem.id !== id)}
+      // console.log(id)
+    )
+  }
+
+  render(){
+    const {todos} = this.state
+    return(
+      <div>
+        <Todos myTodo = { todos } handleChange={this.makeChange.bind(this)} deleteItem={this.deleteData.bind(this)} />
+      </div>
+    )
+  }
 }
 
 export default App;
