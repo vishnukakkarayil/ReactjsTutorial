@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import Todos from './components/todos'
+import AddTodo from './components/addTodo'
 
 class App extends Component{
   state = {
@@ -43,10 +44,14 @@ class App extends Component{
     )
   }
 
+  addToTodo(data){
+    console.log('data')
+  }
   render(){
     const {todos} = this.state
     return(
       <div>
+        <AddTodo addToTodo={this.addToTodo.bind(this)} />
         <Todos myTodo = { todos } handleChange={this.makeChange.bind(this)} deleteItem={this.deleteData.bind(this)} />
       </div>
     )

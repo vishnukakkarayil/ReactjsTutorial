@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import TodoItems from './todoItems'
 import PropTypes from 'prop-types'
+
+import TodoItems from './todoItems'
 
 class Todos extends Component{
     render(){
