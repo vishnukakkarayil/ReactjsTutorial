@@ -5,7 +5,7 @@ class AddTodo extends Component{
     super(props)
     this.addValue = this.addValue.bind(this)
     this.state = {
-        addTodo : '',
+        title : '',
         fname : ''
     }
     }
@@ -13,13 +13,17 @@ class AddTodo extends Component{
     addValue(e){
         this.setState({[e.target.name]:e.target.value})
     }
-
+    handleSubmit = (e) =>{
+        e.preventDefault()
+        this.props.addToTodo(this.state.title)
+        this.setState({title:''})
+    }
 
     render(){
         return(
-            <form style={{ display:'flex'}} onSubmit={this.props.addToTodo}>
+            <form style={{ display:'flex'}} onSubmit={this.handleSubmit}>
                 <input type = "text"
-                name="addTodo"
+                name="title"
                 placeholder="Add Item"
                 onChange = {this.addValue}
                 value={ this.state.addTodo}

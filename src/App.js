@@ -1,23 +1,27 @@
 import React, { Component } from 'react'
+import { v4 as uuid } from 'uuid'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
+import Header from './components/Header'
 import Todos from './components/todos'
 import AddTodo from './components/addTodo'
+import Greeting from './components/Greeting'
 
 class App extends Component{
   state = {
     todos:[
       {
-        id:1,
+        id:uuid(),
         title:'study react',
         completed: false
       },
       {
-        id:2,
+        id:uuid(),
         title:'study php',
         completed: true
       },
       {
-        id:3,
+        id:uuid(),
         title:'study js',
         completed: false
       }
@@ -44,16 +48,32 @@ class App extends Component{
     )
   }
 
-  addToTodo(data){
-    console.log('data')
+  addToTodo(title){
+    const newItem = {
+      id:uuid(),
+      title,
+      completed: false
+    }
+    this.setState({ todos: [...this.state.todos, newItem]
+    })
   }
   render(){
     const {todos} = this.state
     return(
-      <div>
-        <AddTodo addToTodo={this.addToTodo.bind(this)} />
-        <Todos myTodo = { todos } handleChange={this.makeChange.bind(this)} deleteItem={this.deleteData.bind(this)} />
-      </div>
+      <Router>
+        <div>
+          <Header />
+          <Route exact path='/' render={props=>(
+            <>
+            <AddTodo addToTodo={this.addToTodo.bind(this)} />
+            <Todos myTodo = { todos } handleChange={this.makeChange.bind(this)} deleteItem={this.deleteData.bind(this)} />
+            </>
+          )}>
+          </Route>
+          <Route exact path='/greeting/name' render={ props => <Greeting text='Hello' {...props} />} />
+
+        </div>
+      </Router>
     )
   }
 }
