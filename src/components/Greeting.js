@@ -7,9 +7,8 @@ class Greeting extends Component {
         return (
             
             <div>
-                
                 { console.log(text) }
-                <p> abcjkgkjhkbhj </p>
+                <p> {text} {name} </p>
             </div>
         );
     }

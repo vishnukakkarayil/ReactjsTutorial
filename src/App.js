@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { v4 as uuid } from 'uuid'
+// import { v4 as uuid } from 'uuid'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios'
 
@@ -8,6 +8,9 @@ import Header from './components/Header'
 import Todos from './components/todos'
 import AddTodo from './components/addTodo'
 import Greeting from './components/Greeting'
+import Children from './components/pages/Children'
+import Refs from './components/pages/Refs'
+import Hoc from './components/pages/Hoc'
 
 class App extends Component{
   state = {
@@ -69,8 +72,10 @@ class App extends Component{
             </>
           )}>
           </Route>
-          <Route exact path='/greeting/name' render={ props => <Greeting text='Hello' {...props} />} />
-
+          <Route exact path='/greeting/:name' render={ props => <Greeting text='Hello' {...props} />} />
+          <Route exact path = '/children' component={ Children } />
+          <Route exact path='/refs' component = {Refs} />
+          <Route path='/hoc' component={Hoc} />
         </div>
       </Router>
     )
